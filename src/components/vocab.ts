@@ -22,3 +22,16 @@ export interface Word {
   nl: string,
   en: string,
 }
+
+function nextId(vocab: Word[]) {
+  const maxId = vocab.reduce(
+    (prevId: number, word: Word) => prevId > word.id ? prevId : word.id,
+    0
+  );
+  return maxId + 1;
+}
+
+export function addWord(vocab: Word[], en: string, nl: string): Word[] {
+  const id = nextId(vocab);
+  return [...vocab, {id, en, nl}];
+};
