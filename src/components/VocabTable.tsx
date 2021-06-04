@@ -1,7 +1,8 @@
 import { worker } from 'cluster';
 import React, { useState } from 'react';
 import { AddWord } from './AddWord';
-import { initialVocab, Word, addWord} from './vocab';
+import { initialVocab, Word, addWord, removeWord} from './vocab';
+import { WordRow } from './WordRow';
 
 export const VocabTable = () => {
   const [vocab, setVocab] = useState<Word[]>(initialVocab);
@@ -19,11 +20,12 @@ export const VocabTable = () => {
           </tr>
         </thead>
         <tbody>
-          {vocab.map(({id, nl, en}) => (
-            <tr key={id}>
-              <td>{nl}</td>
-              <td>{en}</td>
-            </tr> 
+          {vocab.map((word) => (
+            <WordRow
+              key={word.id}
+              word={word}
+              removeWord={(id) => setVocab(removeWord(vocab, id))}
+            />
           ))}
           <tr>
 

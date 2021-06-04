@@ -35,3 +35,7 @@ export function addWord(vocab: Word[], en: string, nl: string): Word[] {
   const id = nextId(vocab);
   return [...vocab, {id, en, nl}];
 };
+
+export function removeWord(vocab: Word[], id: number): Word[] {
+  return vocab.filter((word) => word.id !== id);
+};
